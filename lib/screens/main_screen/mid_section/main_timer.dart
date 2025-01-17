@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -69,7 +71,7 @@ class TimerPainter extends CustomPainter {
 
     // 빨간색 고리 (진행 부분)
     Paint progressPaint = Paint()
-      ..color = Colors.red
+      ..color = const Color.fromARGB(255, 255, 80, 80)
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round; // 끝부분 둥글게
@@ -86,6 +88,23 @@ class TimerPainter extends CustomPainter {
       false, // 원 내부를 채우지 않음
       progressPaint,
     );
+
+    final scalePaint = Paint()
+      ..color = Colors.grey // 눈금 색상
+      ..strokeWidth = 3.0 // 눈금 두께
+      ..style = PaintingStyle.stroke;
+
+    // 눈금을 10등분으로 나누기
+    for (int i = 0; i < 10; i++) {
+      final angle = (i * 36) * 3.141592 / 180; // 각도 (360도 / 10)
+      final startX =
+          center.dx + radius * 0.8 * sin(angle); // 시작이 위에여야되기 때문에 X 가 sin 임
+      final startY = center.dy + radius * 0.8 * cos(angle);
+      final endX = center.dx + radius * 0.88 * sin(angle);
+      final endY = center.dy + radius * 0.88 * cos(angle);
+
+      canvas.drawLine(Offset(startX, startY), Offset(endX, endY), scalePaint);
+    }
   }
 
   @override

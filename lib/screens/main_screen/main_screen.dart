@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_list/screens/main_pomodoro/bottom_section/main_bottom.dart';
-import 'package:pomodoro_list/screens/main_pomodoro/mid_section/main_mid.dart';
-import 'package:pomodoro_list/screens/main_pomodoro/top_section/main_top_infos.dart';
+import 'package:pomodoro_list/screens/main_screen/bottom_section/main_bottom.dart';
+import 'package:pomodoro_list/screens/main_screen/mid_section/main_mid.dart';
+import 'package:pomodoro_list/screens/main_screen/top_section/main_top_infos.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

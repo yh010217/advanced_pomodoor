@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_list/screens/main_pomodoro/main_screen.dart';
+import 'package:pomodoro_list/screens/main_screen/main_screen.dart';
 import 'package:pomodoro_list/screens/scaffold/main_app_bar.dart';
 import 'package:pomodoro_list/screens/scaffold/main_bottom_app_bar.dart';
 

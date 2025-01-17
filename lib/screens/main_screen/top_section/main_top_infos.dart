@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro_list/screens/main_pomodoro/top_section/main_top_info.dart';
+import 'package:pomodoro_list/screens/main_screen/top_section/main_top_info.dart';
 
 class MainTopInfos extends StatelessWidget {
   const MainTopInfos({super.key});

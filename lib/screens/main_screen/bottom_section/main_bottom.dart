@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro_list/screens/list_screen/list_screen.dart';
-import 'package:pomodoro_list/screens/main_pomodoro/bottom_section/main_bottom_list_unit.dart';
+import 'package:pomodoro_list/screens/main_screen/bottom_section/main_bottom_list_unit.dart';
 
 class MainBottom extends StatelessWidget {
   const MainBottom({super.key});
