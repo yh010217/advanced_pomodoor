@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pomodoro_list/database/database_helper.dart';
+import 'package:pomodoro_list/models/memo_data.dart';
 import 'package:pomodoro_list/screens/list_screen/list_screen.dart';
 import 'package:pomodoro_list/screens/main_screen/bottom_section/main_bottom_list_unit.dart';
 
 class MainBottom extends StatelessWidget {
-  const MainBottom({super.key});
+  MainBottom({super.key});
+  final Future<List<MemoData>> memos = DatabaseHelper().getMemos();
 
   @override
   Widget build(BuildContext context) {
@@ -53,43 +56,78 @@ class MainBottom extends StatelessWidget {
               ],
             ),
           ),
-          Column(
-            spacing: 8,
-            children: [
-              MainBottomListUnit(
-                status: '상태',
-                title: '제목',
-                goalTime: '목표 시간',
-                finalTime: '최종 시간',
-              ),
-              MainBottomListUnit(
-                status: '진행중',
-                title: '포모도로1', // 너무 길면 ...으로 바꿔줘야함
-                goalTime: '25:00',
-                finalTime: '27:18',
-              ),
-              MainBottomListUnit(
-                status: '완료',
-                title: '포모도로2', // 너무 길면 ...으로 바꿔줘야함
-                goalTime: '25:00',
-                finalTime: '27:18',
-              ),
-              MainBottomListUnit(
-                status: '완료',
-                title: '포모도로3', // 너무 길면 ...으로 바꿔줘야함
-                goalTime: '25:00',
-                finalTime: '27:18',
-              ),
-              MainBottomListUnit(
-                status: '완료',
-                title: '포모도로4', // 너무 길면 ...으로 바꿔줘야함
-                goalTime: '25:00',
-                finalTime: '27:18',
-              ),
-            ],
+          FutureBuilder(
+            future: memos,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Column(
+                  children: [
+                    MainBottomListUnit(
+                      status: '상태',
+                      title: '제목',
+                      goalTime: '목표 시간',
+                      finalTime: '최종 시간',
+                    ),
+                    MainBottomListUnit(
+                      status: '진행중',
+                      title: '포모도로1', // 너무 길면 ...으로 바꿔줘야함
+                      goalTime: '25:00',
+                      finalTime: '27:18',
+                    ),
+                    for (var memo in snapshot.data!)
+                      MainBottomListUnit(
+                        status: '진행중',
+                        title: memo.content, // 너무 길면 ...으로 바꿔줘야함
+                        goalTime: '25:00',
+                        finalTime: '27:18',
+                      ),
+                  ],
+                );
+              }
+              return Column(children: []);
+            },
           )
         ],
       ),
     );
   }
 }
+
+/*
+
+            child: Column(
+              spacing: 8,
+              children: [
+                MainBottomListUnit(
+                  status: '상태',
+                  title: '제목',
+                  goalTime: '목표 시간',
+                  finalTime: '최종 시간',
+                ),
+                MainBottomListUnit(
+                  status: '진행중',
+                  title: '포모도로1', // 너무 길면 ...으로 바꿔줘야함
+                  goalTime: '25:00',
+                  finalTime: '27:18',
+                ),
+                MainBottomListUnit(
+                  status: '완료',
+                  title: '포모도로2', // 너무 길면 ...으로 바꿔줘야함
+                  goalTime: '25:00',
+                  finalTime: '27:18',
+                ),
+                MainBottomListUnit(
+                  status: '완료',
+                  title: '포모도로3', // 너무 길면 ...으로 바꿔줘야함
+                  goalTime: '25:00',
+                  finalTime: '27:18',
+                ),
+                MainBottomListUnit(
+                  status: '완료',
+                  title: '포모도로4', // 너무 길면 ...으로 바꿔줘야함
+                  goalTime: '25:00',
+                  finalTime: '27:18',
+                ),
+              ],
+            ),
+*/
